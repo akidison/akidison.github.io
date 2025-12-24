@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKIDISLAB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        nav {
+            display: flex;
+            gap: 32px;
+        }
+        nav a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #fff;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(120, 80, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 150, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 20% 80%, rgba(255, 0, 100, 0.08) 0%, transparent 40%);
+        }
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #fff 0%, #666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: #666;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        /* Apps Section */
+        .apps-section {
+            padding: 100px 24px;
+            background: #0a0a0a;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 60px;
+        }
+        .apps-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .app-card {
+            width: 280px;
+            background: #111;
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border: 1px solid #222;
+            transition: all 0.3s ease;
+        }
+        .app-card:hover {
+            transform: translateY(-8px);
+            border-color: #333;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        .app-card.disabled {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+        .app-icon-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .app-emoji {
+            font-size: 5rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+        .app-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .app-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        .app-store-badge {
+            height: 44px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255, 180, 0, 0.15);
+            color: #ffb400;
+            border: 1px solid rgba(255, 180, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 24px;
+            text-align: center;
+            border-top: 1px solid #151515;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+        .copyright {
+            color: #333;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 20px;
+            }
+            nav {
+                gap: 20px;
+            }
+            .apps-grid {
+                gap: 24px;
+            }
+            .app-card {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">AKIDISLAB</div>
+        <nav>
+            <a href="#apps">Apps</a>
+            <a href="support.html">Support</a>
+            <a href="mailto:akidislab@gmail.com">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 class="hero-title">AKIDISLAB</h1>
+        <p class="hero-subtitle">We create beautiful and engaging mobile apps and games for iOS</p>
+    </section>
+
+    <section class="apps-section" id="apps">
+        <h2 class="section-title">Our Apps</h2>
+        <div class="apps-grid">
+            <a href="https://apps.apple.com/app/id6756848592" class="app-card">
+                <img src="stackup-icon.png" alt="Stack Up!" class="app-icon-img">
+                <div class="app-name">Stack Up!</div>
+                <p class="app-desc">Addictive tower stacking game. Test your precision and beat your high score!</p>
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="app-store-badge">
+            </a>
+            <div class="app-card disabled">
+                <span class="app-emoji">📚</span>
+                <div class="app-name">Words Learning</div>
+                <p class="app-desc">Master new languages with smart flashcards and engaging exercises</p>
+                <span class="status-badge">Coming Soon</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="support.html">Support</a>
+            <a href="mailto:akidislab@gmail.com">Contact</a>
+        </div>
+        <p class="copyright">© 2025 AKIDISLAB</p>
+    </footer>
+</body>
+</html>
