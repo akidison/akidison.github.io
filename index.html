@@ -6,7 +6,7 @@
     <title>AKIDISLAB</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,6 +18,61 @@
             background: #000;
             color: white;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: #000;
+        }
+        .bg-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(120, 0, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 150, 255, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 60%, rgba(255, 0, 100, 0.2) 0%, transparent 40%),
+                radial-gradient(ellipse at 60% 30%, rgba(0, 255, 200, 0.15) 0%, transparent 40%);
+            animation: gradientMove 20s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2%, 2%) rotate(1deg); }
+            50% { transform: translate(-1%, 3%) rotate(-1deg); }
+            75% { transform: translate(-2%, -1%) rotate(0.5deg); }
+        }
+
+        /* Stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         /* Header */
@@ -31,28 +86,52 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 16px 40px;
         }
         .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: 2px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #fff 0%, #a855f7 50%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         nav {
             display: flex;
             gap: 32px;
         }
         nav a {
-            color: #999;
+            color: rgba(255,255,255,0.6);
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a855f7, #6366f1);
+            transition: width 0.3s ease;
         }
         nav a:hover {
             color: #fff;
+        }
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* Hero */
@@ -64,114 +143,272 @@
             align-items: center;
             text-align: center;
             padding: 120px 24px 80px;
-            background:
-                radial-gradient(ellipse at 50% 0%, rgba(120, 80, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(0, 150, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(ellipse at 20% 80%, rgba(255, 0, 100, 0.08) 0%, transparent 40%);
+            position: relative;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #c084fc;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+        .hero-badge::before {
+            content: '✨';
         }
         .hero-title {
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 800;
-            letter-spacing: -2px;
+            font-size: clamp(3.5rem, 12vw, 8rem);
+            font-weight: 900;
+            letter-spacing: -4px;
             margin-bottom: 24px;
-            background: linear-gradient(180deg, #fff 0%, #666 100%);
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.4) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+            opacity: 0;
+            text-shadow: 0 0 80px rgba(168, 85, 247, 0.5);
         }
         .hero-subtitle {
-            font-size: clamp(1rem, 3vw, 1.4rem);
-            color: #666;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: rgba(255,255,255,0.5);
             max-width: 500px;
-            line-height: 1.6;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+        .hero-cta {
+            margin-top: 48px;
+            display: flex;
+            gap: 16px;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            opacity: 0;
+        }
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+            color: white;
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(168, 85, 247, 0.6);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: rgba(255,255,255,0.3);
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Apps Section */
         .apps-section {
-            padding: 100px 24px;
-            background: #0a0a0a;
+            padding: 120px 24px;
+            position: relative;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #a855f7;
+            margin-bottom: 16px;
         }
         .section-title {
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #666;
-            margin-bottom: 60px;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .apps-grid {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 32px;
             flex-wrap: wrap;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         .app-card {
-            width: 280px;
-            background: #111;
-            border-radius: 24px;
-            padding: 40px 32px;
+            width: 320px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border-radius: 28px;
+            padding: 48px 36px;
             text-align: center;
             text-decoration: none;
             color: white;
-            border: 1px solid #222;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         .app-card:hover {
-            transform: translateY(-8px);
-            border-color: #333;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow:
+                0 40px 80px rgba(0,0,0,0.4),
+                0 0 60px rgba(168, 85, 247, 0.2);
+        }
+        .app-card:hover::before {
+            opacity: 1;
         }
         .app-card.disabled {
             pointer-events: none;
-            opacity: 0.4;
+        }
+        .app-card.disabled:hover {
+            transform: none;
+        }
+        .app-icon-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 28px;
         }
         .app-icon-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 22px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 110px;
+            height: 110px;
+            border-radius: 26px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 1;
+        }
+        .app-icon-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
+            filter: blur(20px);
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .app-card:hover .app-icon-glow {
+            opacity: 1;
         }
         .app-emoji {
-            font-size: 5rem;
-            margin-bottom: 24px;
+            font-size: 5.5rem;
+            margin-bottom: 28px;
             display: block;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
         }
         .app-name {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
         }
         .app-desc {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 24px;
-            line-height: 1.5;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 28px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
         .app-store-badge {
-            height: 44px;
+            height: 48px;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .app-card:hover .app-store-badge {
+            transform: scale(1.05);
         }
         .status-badge {
             display: inline-block;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            background: rgba(255, 180, 0, 0.15);
-            color: #ffb400;
-            border: 1px solid rgba(255, 180, 0, 0.3);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            position: relative;
+            z-index: 1;
         }
 
         /* Footer */
         footer {
-            padding: 60px 24px;
+            padding: 80px 24px 40px;
             text-align: center;
-            border-top: 1px solid #151515;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 100%);
+        }
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 32px;
         }
         .footer-links {
             display: flex;
@@ -180,38 +417,57 @@
             margin-bottom: 40px;
         }
         .footer-links a {
-            color: #666;
+            color: rgba(255,255,255,0.5);
             text-decoration: none;
             font-size: 0.9rem;
-            transition: color 0.2s;
+            transition: color 0.3s ease;
         }
         .footer-links a:hover {
-            color: #fff;
+            color: #a855f7;
         }
         .copyright {
-            color: #333;
+            color: rgba(255,255,255,0.2);
             font-size: 0.85rem;
         }
 
-        @media (max-width: 600px) {
+        /* Mobile */
+        @media (max-width: 768px) {
             header {
                 padding: 16px 20px;
             }
             nav {
                 gap: 20px;
             }
+            nav a {
+                font-size: 0.85rem;
+            }
+            .hero-title {
+                letter-spacing: -2px;
+            }
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
             .apps-grid {
                 gap: 24px;
             }
             .app-card {
                 width: 100%;
-                max-width: 320px;
+                max-width: 340px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
+    <div class="bg-gradient"></div>
+    <div class="stars" id="stars"></div>
+
+    <header id="header">
         <div class="logo">AKIDISLAB</div>
         <nav>
             <a href="#apps">Apps</a>
@@ -221,15 +477,36 @@
     </header>
 
     <section class="hero">
+        <span class="hero-badge">Indie iOS Developer</span>
         <h1 class="hero-title">AKIDISLAB</h1>
-        <p class="hero-subtitle">We create beautiful and engaging mobile apps and games for iOS</p>
+        <p class="hero-subtitle">Crafting beautiful and engaging mobile experiences for iOS. Simple apps, endless fun.</p>
+        <div class="hero-cta">
+            <a href="#apps" class="btn btn-primary">
+                <span>Explore Apps</span>
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7"/>
+                </svg>
+            </a>
+            <a href="mailto:akidislab@gmail.com" class="btn btn-secondary">Get in Touch</a>
+        </div>
+        <div class="scroll-indicator">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7"/>
+            </svg>
+        </div>
     </section>
 
     <section class="apps-section" id="apps">
-        <h2 class="section-title">Our Apps</h2>
+        <div class="section-header">
+            <div class="section-label">Portfolio</div>
+            <h2 class="section-title">Our Apps</h2>
+        </div>
         <div class="apps-grid">
             <a href="https://apps.apple.com/app/id6756848592" class="app-card">
-                <img src="stackup-icon.png" alt="Stack Up!" class="app-icon-img">
+                <div class="app-icon-container">
+                    <div class="app-icon-glow"></div>
+                    <img src="stackup-icon.png" alt="Stack Up!" class="app-icon-img">
+                </div>
                 <div class="app-name">Stack Up!</div>
                 <p class="app-desc">Addictive tower stacking game. Test your precision and beat your high score!</p>
                 <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="app-store-badge">
@@ -244,11 +521,48 @@
     </section>
 
     <footer>
+        <div class="footer-logo">AKIDISLAB</div>
         <div class="footer-links">
             <a href="support.html">Support</a>
+            <a href="privacy.html">Privacy</a>
             <a href="mailto:akidislab@gmail.com">Contact</a>
         </div>
-        <p class="copyright">© 2025 AKIDISLAB</p>
+        <p class="copyright">© 2025 AKIDISLAB. Made with ❤️</p>
     </footer>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.opacity = Math.random() * 0.5 + 0.2;
+            starsContainer.appendChild(star);
+        }
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

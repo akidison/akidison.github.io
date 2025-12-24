@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support - AKIDISLAB</title>
+    <title>Privacy Policy - AKIDISLAB</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated gradient overlay */
         body::before {
             content: '';
             position: fixed;
@@ -42,7 +41,6 @@
             50% { opacity: 1; }
         }
 
-        /* Stars background */
         .stars {
             position: fixed;
             top: 0;
@@ -67,7 +65,6 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -126,7 +123,6 @@
             width: 100%;
         }
 
-        /* Main container */
         .container {
             position: relative;
             z-index: 1;
@@ -135,7 +131,6 @@
             padding: 140px 24px 60px;
         }
 
-        /* Hero section */
         .hero {
             text-align: center;
             margin-bottom: 60px;
@@ -170,8 +165,13 @@
             margin: 0 auto;
         }
 
-        /* Support cards */
-        .support-card {
+        .hero .updated {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 15px;
+        }
+
+        .privacy-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
@@ -183,123 +183,91 @@
             animation-fill-mode: both;
         }
 
-        .support-card:nth-child(1) { animation-delay: 0.1s; }
-        .support-card:nth-child(2) { animation-delay: 0.2s; }
-        .support-card:nth-child(3) { animation-delay: 0.3s; }
+        .privacy-card:nth-child(1) { animation-delay: 0.1s; }
+        .privacy-card:nth-child(2) { animation-delay: 0.15s; }
+        .privacy-card:nth-child(3) { animation-delay: 0.2s; }
+        .privacy-card:nth-child(4) { animation-delay: 0.25s; }
+        .privacy-card:nth-child(5) { animation-delay: 0.3s; }
+        .privacy-card:nth-child(6) { animation-delay: 0.35s; }
 
-        .support-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(102, 126, 234, 0.5);
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                0 0 60px rgba(102, 126, 234, 0.1);
+        .privacy-card:hover {
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .support-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
+        .privacy-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
             background: linear-gradient(135deg, #fff 0%, #a8a8ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .support-card p {
-            color: rgba(255, 255, 255, 0.6);
+        .privacy-card h2 .icon {
+            font-size: 1.5rem;
+        }
+
+        .privacy-card p {
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
-        .support-card a {
+        .privacy-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .privacy-card ul {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .privacy-card li {
+            margin-bottom: 8px;
+        }
+
+        .privacy-card a {
             color: #a8a8ff;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .support-card a:hover {
+        .privacy-card a:hover {
             color: #fff;
         }
 
-        /* Email button */
-        .email-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .email-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-            color: white;
-        }
-
-        /* FAQ items */
-        .faq-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 24px 0;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .faq-item:first-child {
-            padding-top: 0;
-        }
-
-        .faq-item h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .faq-item h3::before {
-            content: '?';
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-
-        .faq-item p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin: 0;
-            padding-left: 38px;
-        }
-
-        /* Response time card special */
-        .response-card {
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
             text-align: center;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
         }
 
-        .response-card .icon {
-            font-size: 3rem;
+        .highlight-card .big-icon {
+            font-size: 4rem;
             margin-bottom: 20px;
         }
 
-        /* Footer */
+        .apps-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .app-badge {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         footer {
             position: relative;
             z-index: 1;
@@ -324,7 +292,6 @@
             color: #667eea;
         }
 
-        /* Mobile responsive */
         @media (max-width: 768px) {
             header {
                 padding: 15px 20px;
@@ -347,21 +314,12 @@
                 font-size: 1.1rem;
             }
 
-            .support-card {
+            .privacy-card {
                 padding: 28px;
             }
 
-            .faq-item h3 {
-                font-size: 1rem;
-            }
-
-            .faq-item p {
-                padding-left: 0;
-                margin-top: 10px;
-            }
-
-            .faq-item h3::before {
-                display: none;
+            .privacy-card h2 {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -373,61 +331,83 @@
         <a href="index.html" class="logo">AKIDISLAB</a>
         <nav>
             <a href="index.html#apps">Apps</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="support.html">Support</a>
         </nav>
     </header>
 
     <div class="container">
         <div class="hero">
-            <h1>Support</h1>
-            <p class="subtitle">We're here to help you with any questions or issues</p>
+            <h1>Privacy Policy</h1>
+            <p class="subtitle">Your privacy is important to us</p>
+            <p class="updated">Last updated: December 2024</p>
         </div>
 
-        <div class="support-card">
-            <h2>Contact Us</h2>
-            <p>Have a question, found a bug, or want to suggest a feature? We'd love to hear from you!</p>
-            <a href="mailto:akidislab@gmail.com" class="email-btn">
-                <span>✉️</span> akidislab@gmail.com
-            </a>
-        </div>
-
-        <div class="support-card">
-            <h2>Frequently Asked Questions</h2>
-
-            <div class="faq-item">
-                <h3>How do I restore my purchases?</h3>
-                <p>Go to Settings in the app and tap "Restore Purchases". Make sure you're signed in with the same Apple ID you used for the original purchase.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>How do I cancel my subscription?</h3>
-                <p>Subscriptions are managed through your Apple ID. Go to Settings → [Your Name] → Subscriptions on your device to manage or cancel.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>The app is crashing or not working properly</h3>
-                <p>Try closing and reopening the app. If the issue persists, try reinstalling the app or contact us with details about your device and iOS version.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>How do I request a refund?</h3>
-                <p>Refunds are processed by Apple. Visit <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a> to request a refund for any purchase.</p>
+        <div class="privacy-card highlight-card">
+            <div class="big-icon">🔒</div>
+            <h2>We Value Your Privacy</h2>
+            <p>This policy applies to all apps developed and published by AKIDISLAB. We believe in transparency and keeping things simple.</p>
+            <div class="apps-list">
+                <span class="app-badge">Tower Stack</span>
+                <span class="app-badge">Print Page</span>
+                <span class="app-badge">All Future Apps</span>
             </div>
         </div>
 
-        <div class="support-card response-card">
-            <div class="icon">⚡</div>
-            <h2>Response Time</h2>
-            <p>We typically respond to support requests within 24-48 hours. Thank you for your patience!</p>
+        <div class="privacy-card">
+            <h2><span class="icon">📊</span> Data Collection</h2>
+            <p>Our apps are designed with privacy in mind. We do not collect, store, or share any personal information.</p>
+            <p><strong>What we DON'T collect:</strong></p>
+            <ul>
+                <li>Personal identification information</li>
+                <li>Location data</li>
+                <li>Contact information</li>
+                <li>Usage tracking or analytics</li>
+                <li>Device identifiers for advertising</li>
+            </ul>
+        </div>
+
+        <div class="privacy-card">
+            <h2><span class="icon">💾</span> Local Storage</h2>
+            <p>Some of our apps may store data locally on your device to save your progress, preferences, or created content. This data:</p>
+            <ul>
+                <li>Stays on your device only</li>
+                <li>Is never transmitted to our servers</li>
+                <li>Can be deleted by uninstalling the app</li>
+            </ul>
+        </div>
+
+        <div class="privacy-card">
+            <h2><span class="icon">💳</span> Purchases</h2>
+            <p>In-app purchases and subscriptions are processed entirely by Apple through the App Store. We do not have access to your payment information, Apple ID, or purchase history beyond what Apple provides for transaction verification.</p>
+        </div>
+
+        <div class="privacy-card">
+            <h2><span class="icon">📢</span> Advertising</h2>
+            <p>Some of our apps may display advertisements provided by third-party ad networks (such as Google AdMob). These services may collect anonymous data according to their own privacy policies. You can opt out of personalized advertising in your device settings.</p>
+        </div>
+
+        <div class="privacy-card">
+            <h2><span class="icon">👶</span> Children's Privacy</h2>
+            <p>Our apps do not knowingly collect any personal information from children. All data processing (if any) occurs locally on the device.</p>
+        </div>
+
+        <div class="privacy-card">
+            <h2><span class="icon">📝</span> Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+        </div>
+
+        <div class="privacy-card">
+            <h2><span class="icon">📧</span> Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+            <p><a href="mailto:akidislab@gmail.com">akidislab@gmail.com</a></p>
         </div>
     </div>
 
     <footer>
-        <p>© 2025 AKIDISLAB · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a></p>
+        <p>© 2025 AKIDISLAB · <a href="index.html">Home</a> · <a href="support.html">Support</a></p>
     </footer>
 
     <script>
-        // Generate stars
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
@@ -440,7 +420,6 @@
             starsContainer.appendChild(star);
         }
 
-        // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
