@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "EZ696X67SZ.com.pushwoosh.PushwooshSampleApp",
+        "paths": ["*"]
+      }
+    ]
+  }
+}
