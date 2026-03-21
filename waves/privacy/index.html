@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waves — Privacy Policy</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #050508;
+            color: #ffffff;
+            padding: 40px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        h1 {
+            color: #00ffe0;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        h2 {
+            color: #8c00ff;
+            font-size: 16px;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        p, li {
+            color: #ffffffcc;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 6px; }
+        .date { color: #ffffff55; font-size: 12px; margin-bottom: 32px; }
+        .highlight { color: #00ff66; }
+        .warn { color: #ff008c; }
+        a { color: #00ffe0; }
+    </style>
+</head>
+<body>
+    <h1>Waves — Dark Mesh Chat</h1>
+    <p class="date">Privacy Policy · Effective: March 21, 2026</p>
+
+    <h2>Overview</h2>
+    <p>Waves is a peer-to-peer mesh messenger that works without internet. Your privacy is our core principle. <span class="highlight">We collect as little data as possible.</span></p>
+
+    <h2>What We Do NOT Collect</h2>
+    <ul>
+        <li><span class="highlight">No accounts</span> — no email, no phone number, no registration</li>
+        <li><span class="highlight">No message content</span> — messages are never sent to any server</li>
+        <li><span class="highlight">No user profiles</span> — your name and avatar stay on your device</li>
+        <li><span class="highlight">No contacts</span> — your friend list is stored locally only</li>
+        <li><span class="highlight">No analytics</span> — no tracking, no telemetry, no usage data</li>
+        <li><span class="highlight">No advertising</span> — no ads, no ad networks, no ad identifiers</li>
+        <li><span class="highlight">No browsing history</span> — no web views, no cookies</li>
+    </ul>
+
+    <h2>What We Store Locally on Your Device</h2>
+    <ul>
+        <li>Your display name and avatar (UserDefaults)</li>
+        <li>Your contacts/friends list (UserDefaults)</li>
+        <li>Chat messages — stored temporarily, auto-deleted based on your TTL setting (default: 1 hour)</li>
+        <li>Voice messages — stored as temporary audio files, auto-deleted with messages</li>
+        <li>App settings (notifications, TTL, max hops)</li>
+        <li>E2E encryption private key (iOS Keychain — never leaves your device)</li>
+    </ul>
+    <p>All local data is deleted when you uninstall the app.</p>
+
+    <h2>What We Store in the Cloud</h2>
+    <p>Waves uses Firebase Firestore <span class="warn">only</span> for location-based group pins. When you create a location group, we store:</p>
+    <ul>
+        <li>Group name</li>
+        <li>GPS coordinates (latitude, longitude)</li>
+        <li>Group radius in meters</li>
+        <li>Whether the group has a password (boolean)</li>
+        <li>Password hash (if set) — we never store the actual password</li>
+        <li>Creation date</li>
+    </ul>
+    <p><span class="highlight">We do NOT store:</span> who created the group, who joined, any user names, any device identifiers, any messages, or any personal information.</p>
+
+    <h2>Encryption</h2>
+    <p>All direct (private) messages are encrypted end-to-end using Curve25519 key exchange and ChaChaPoly symmetric encryption. Only the sender and recipient can read message content. Relay nodes in the mesh network see only encrypted data.</p>
+    <p>Broadcast messages are not encrypted — they are intended for everyone nearby.</p>
+
+    <h2>Mesh Network</h2>
+    <p>Waves communicates directly between devices using Apple's MultipeerConnectivity framework (Bluetooth and Wi-Fi Direct). <span class="highlight">No data passes through our servers.</span> Messages may relay through intermediate devices to extend range — relay devices cannot read encrypted content.</p>
+
+    <h2>Permissions</h2>
+    <ul>
+        <li><strong>Bluetooth</strong> — Required to discover and connect with nearby devices</li>
+        <li><strong>Local Network</strong> — Required for Wi-Fi Direct mesh communication</li>
+        <li><strong>Microphone</strong> — Only when you record a voice message (push-to-talk)</li>
+        <li><strong>Location</strong> — Only when you create a location-based group (optional)</li>
+        <li><strong>Photos</strong> — Only when you send a photo message (optional)</li>
+        <li><strong>Nearby Interaction</strong> — For AR Radar distance measurement (iPhone 11+, optional)</li>
+    </ul>
+
+    <h2>Children's Privacy</h2>
+    <p>Waves is rated 12+ and is not directed at children under 13. We do not knowingly collect any personal information from children.</p>
+
+    <h2>Data Retention</h2>
+    <p>Messages auto-delete based on your TTL setting (15 minutes to 2 hours). Location group pins remain in Firebase until the group creator deletes them. All local data is deleted when you uninstall the app.</p>
+
+    <h2>Third-Party Services</h2>
+    <p>Waves uses Firebase Firestore (Google) solely for storing location group coordinates. No user-identifiable data is sent to Firebase. We do not use any analytics, advertising, or tracking SDKs.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this privacy policy? Contact us at <a href="mailto:akidislab@gmail.com">akidislab@gmail.com</a></p>
+
+    <p style="margin-top: 48px; color: #ffffff33; font-size: 11px;">© 2026 AKIDISLAB. Waves — Dark Mesh Chat.</p>
+</body>
+</html>
