@@ -15,23 +15,9 @@
             margin: 0 auto;
             line-height: 1.7;
         }
-        h1 {
-            color: #00ffe0;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        h2 {
-            color: #8c00ff;
-            font-size: 16px;
-            margin-top: 32px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-        p, li {
-            color: #ffffffcc;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
+        h1 { color: #00ffe0; font-size: 24px; margin-bottom: 8px; }
+        h2 { color: #8c00ff; font-size: 16px; margin-top: 32px; margin-bottom: 12px; text-transform: uppercase; }
+        p, li { color: #ffffffcc; font-size: 14px; margin-bottom: 12px; }
         ul { padding-left: 20px; }
         li { margin-bottom: 6px; }
         .date { color: #ffffff55; font-size: 12px; margin-bottom: 32px; }
@@ -42,7 +28,7 @@
 </head>
 <body>
     <h1>Waves — Dark Mesh Chat</h1>
-    <p class="date">Privacy Policy · Effective: March 21, 2026</p>
+    <p class="date">Privacy Policy · Effective: March 23, 2026</p>
 
     <h2>Overview</h2>
     <p>Waves is a peer-to-peer mesh messenger that works without internet. Your privacy is our core principle. <span class="highlight">We collect as little data as possible.</span></p>
@@ -50,68 +36,116 @@
     <h2>What We Do NOT Collect</h2>
     <ul>
         <li><span class="highlight">No accounts</span> — no email, no phone number, no registration</li>
-        <li><span class="highlight">No message content</span> — messages are never sent to any server</li>
-        <li><span class="highlight">No user profiles</span> — your name and avatar stay on your device</li>
-        <li><span class="highlight">No contacts</span> — your friend list is stored locally only</li>
-        <li><span class="highlight">No analytics</span> — no tracking, no telemetry, no usage data</li>
+        <li><span class="highlight">No message content on servers</span> — messages travel directly between devices</li>
+        <li><span class="highlight">No user profiles on servers</span> — your name and avatar stay on your device</li>
+        <li><span class="highlight">No contacts uploaded</span> — your friend list is stored locally only</li>
         <li><span class="highlight">No advertising</span> — no ads, no ad networks, no ad identifiers</li>
         <li><span class="highlight">No browsing history</span> — no web views, no cookies</li>
     </ul>
 
+    <h2>How Messaging Works</h2>
+    <p>Messages are sent directly between devices via Bluetooth and Wi-Fi Direct using Apple's MultipeerConnectivity framework. <span class="highlight">Messages never pass through our servers.</span></p>
+    <p>All direct messages are <span class="highlight">end-to-end encrypted</span> using Curve25519 key exchange and ChaChaPoly symmetric encryption (via Apple CryptoKit). Only the sender and recipient can read messages.</p>
+    <p>Messages may relay through intermediate devices to extend range — relay devices cannot read encrypted content.</p>
+    <p>Broadcast messages (General chat) are not encrypted — they are intended for everyone nearby.</p>
+
+    <h2>Nostr Bridge</h2>
+    <p>When nearby devices are not available, direct messages can be routed through <span class="highlight">Nostr relay servers</span> — a decentralized open protocol. Messages are end-to-end encrypted <span class="warn">before</span> leaving your device. Relay servers cannot read message content.</p>
+    <p>Relay servers may see: your Nostr public key, recipient's Nostr public key, the encrypted message blob, a timestamp, and your IP address.</p>
+    <p>We use public Nostr relays (relay.damus.io, nos.lol, relay.nostr.band). We do not operate these servers and have no control over them.</p>
+    <p><span class="highlight">This feature is completely disabled when Offline Only mode is enabled.</span></p>
+
     <h2>What We Store Locally on Your Device</h2>
     <ul>
         <li>Your display name and avatar (UserDefaults)</li>
-        <li>Your contacts/friends list (UserDefaults)</li>
-        <li>Chat messages — stored temporarily, auto-deleted based on your TTL setting (default: 1 hour)</li>
-        <li>Voice messages — stored as temporary audio files, auto-deleted with messages</li>
-        <li>App settings (notifications, TTL, max hops)</li>
-        <li>E2E encryption private key (iOS Keychain — never leaves your device)</li>
+        <li>Device ID — a random UUID stored in iOS Keychain (persists across reinstalls)</li>
+        <li>E2E encryption keys — Curve25519 private key in iOS Keychain, peer public keys in app files</li>
+        <li>Nostr keys — secp256k1 keypair in iOS Keychain</li>
+        <li>Contacts/friends list (UserDefaults)</li>
+        <li>Chat messages — stored temporarily, auto-deleted based on your TTL setting</li>
+        <li>Voice messages and photos — stored as temporary files, auto-deleted with messages</li>
+        <li>App settings (notifications, TTL, max hops, privacy preferences)</li>
     </ul>
-    <p>All local data is deleted when you uninstall the app.</p>
+    <p>All local data is deleted when you uninstall the app (except Keychain items which persist for identity continuity).</p>
 
     <h2>What We Store in the Cloud</h2>
-    <p>Waves uses Firebase Firestore <span class="warn">only</span> for location-based group pins. When you create a location group, we store:</p>
+    <p>Waves uses Firebase Firestore (Google) for:</p>
     <ul>
-        <li>Group name</li>
-        <li>GPS coordinates (latitude, longitude)</li>
-        <li>Group radius in meters</li>
-        <li>Whether the group has a password (boolean)</li>
-        <li>Password hash (if set) — we never store the actual password</li>
-        <li>Creation date</li>
+        <li><strong>Location Groups</strong> — group name, GPS coordinates, radius, password hash, creation date</li>
+        <li><strong>Dead Drops</strong> — message text, GPS coordinates, sender display name, creation date, expiry date</li>
+        <li><strong>Reports</strong> — reporter device ID, reported device ID, reported display name, reason, timestamp</li>
     </ul>
-    <p><span class="highlight">We do NOT store:</span> who created the group, who joined, any user names, any device identifiers, any messages, or any personal information.</p>
+    <p><span class="highlight">We do NOT store:</span> who created or joined groups, real names, email addresses, phone numbers, device identifiers (except in reports), message content from chats, or any personal information.</p>
+    <p><span class="highlight">All cloud features are completely disabled when Offline Only mode is enabled.</span></p>
+
+    <h2>Analytics</h2>
+    <p>Waves uses Firebase Analytics to understand how features are used (e.g., number of messages sent, features opened). <span class="warn">No message content is ever collected.</span></p>
+    <p>Firebase Analytics may collect: app events, app version, device model, OS version, country (from IP), and anonymized usage patterns.</p>
+    <p><span class="highlight">Analytics is completely disabled when Offline Only mode is enabled.</span> You can enable Offline Only mode in Settings → Privacy & Security.</p>
+
+    <h2>Offline Only Mode</h2>
+    <p>When enabled, <span class="highlight">ALL internet features are disabled</span>: no Firebase Analytics, no Firestore (groups, dead drops, reports), no Nostr relay bridge. The app works exclusively via Bluetooth and Wi-Fi Direct mesh. <span class="highlight">Zero data leaves your device.</span></p>
 
     <h2>Encryption</h2>
-    <p>All direct (private) messages are encrypted end-to-end using Curve25519 key exchange and ChaChaPoly symmetric encryption. Only the sender and recipient can read message content. Relay nodes in the mesh network see only encrypted data.</p>
-    <p>Broadcast messages are not encrypted — they are intended for everyone nearby.</p>
-
-    <h2>Mesh Network</h2>
-    <p>Waves communicates directly between devices using Apple's MultipeerConnectivity framework (Bluetooth and Wi-Fi Direct). <span class="highlight">No data passes through our servers.</span> Messages may relay through intermediate devices to extend range — relay devices cannot read encrypted content.</p>
+    <ul>
+        <li><strong>E2E Messaging:</strong> Curve25519 ECDH key exchange + ChaChaPoly symmetric encryption (Apple CryptoKit)</li>
+        <li><strong>Nostr Signing:</strong> secp256k1 Schnorr signatures (BIP-340 standard)</li>
+        <li><strong>Key Storage:</strong> Private keys stored in iOS Keychain with kSecAttrAccessibleAfterFirstUnlock</li>
+        <li><strong>Key Exchange:</strong> Public keys exchanged via mesh (peerInfo) or QR code scan</li>
+    </ul>
 
     <h2>Permissions</h2>
     <ul>
-        <li><strong>Bluetooth</strong> — Required to discover and connect with nearby devices</li>
-        <li><strong>Local Network</strong> — Required for Wi-Fi Direct mesh communication</li>
-        <li><strong>Microphone</strong> — Only when you record a voice message (push-to-talk)</li>
-        <li><strong>Location</strong> — Only when you create a location-based group (optional)</li>
-        <li><strong>Photos</strong> — Only when you send a photo message (optional)</li>
-        <li><strong>Nearby Interaction</strong> — For AR Radar distance measurement (iPhone 11+, optional)</li>
+        <li><strong>Bluetooth</strong> — Required: discover and connect with nearby devices</li>
+        <li><strong>Local Network</strong> — Required: Wi-Fi Direct mesh communication</li>
+        <li><strong>Microphone</strong> — Optional: voice messages and Mesh Radio</li>
+        <li><strong>Location</strong> — Optional: location groups, Dead Drops, location sharing</li>
+        <li><strong>Camera</strong> — Optional: QR code scanning for adding contacts</li>
+        <li><strong>Photos</strong> — Optional: sending photo messages</li>
+        <li><strong>Face ID</strong> — Optional: App Lock feature</li>
+        <li><strong>Speech Recognition</strong> — Optional: voice-to-text transcription</li>
+        <li><strong>Nearby Interaction (UWB)</strong> — Optional: AR Radar distance measurement (iPhone 11+)</li>
     </ul>
 
-    <h2>Children's Privacy</h2>
-    <p>Waves is rated 12+ and is not directed at children under 13. We do not knowingly collect any personal information from children.</p>
+    <h2>Third-Party Services</h2>
+    <ul>
+        <li><strong>Firebase Firestore (Google)</strong> — Location group pins, Dead Drops, user reports. No message content.</li>
+        <li><strong>Firebase Analytics (Google)</strong> — Anonymous usage statistics. No message content.</li>
+        <li><strong>Nostr Relay Servers</strong> — Decentralized message relay. Only encrypted blobs transmitted.</li>
+        <li><strong>secp256k1.swift (GigaBitcoin)</strong> — Open-source cryptographic library, runs locally on device.</li>
+    </ul>
+    <p>We do not use any advertising networks, data brokers, social media SDKs, or tracking services.</p>
+
+    <h2>Content Moderation</h2>
+    <p>Users can block any user from their profile. Users can report users via "Report & Block" — reports are sent to our moderation system (Firebase). Broadcast messages are filtered for spam. Content Guidelines are available within the app.</p>
+
+    <h2>Age Restriction</h2>
+    <p>Waves is rated <span class="warn">17+</span> due to unrestricted user-generated content. The app is not directed at children under 17.</p>
 
     <h2>Data Retention</h2>
-    <p>Messages auto-delete based on your TTL setting (15 minutes to 2 hours). Location group pins remain in Firebase until the group creator deletes them. All local data is deleted when you uninstall the app.</p>
+    <ul>
+        <li>Chat messages: auto-deleted based on TTL setting (15 min to 24 hours)</li>
+        <li>Dead Drops: auto-deleted after 24 hours</li>
+        <li>Location groups: persist until creator deletes them</li>
+        <li>Reports: retained for moderation purposes</li>
+        <li>Local data: deleted when app is uninstalled</li>
+    </ul>
 
-    <h2>Third-Party Services</h2>
-    <p>Waves uses Firebase Firestore (Google) solely for storing location group coordinates. No user-identifiable data is sent to Firebase. We do not use any analytics, advertising, or tracking SDKs.</p>
+    <h2>Your Rights</h2>
+    <ul>
+        <li>Delete all data instantly using <strong>Emergency Wipe</strong> in Settings</li>
+        <li>Enable <strong>Offline Only</strong> mode to prevent any data from leaving your device</li>
+        <li><strong>Block and report</strong> any user</li>
+        <li>Control message lifetime via <strong>TTL settings</strong></li>
+        <li>Use <strong>Anonymous Mode</strong> to hide your identity in broadcasts</li>
+    </ul>
 
     <h2>Changes to This Policy</h2>
     <p>We may update this policy from time to time. Changes will be posted on this page with an updated effective date.</p>
 
     <h2>Contact</h2>
-    <p>Questions about this privacy policy? Contact us at <a href="mailto:akidislab@gmail.com">akidislab@gmail.com</a></p>
+    <p>Questions about this privacy policy?</p>
+    <p>Email: <a href="mailto:support@akidislab.com">support@akidislab.com</a></p>
 
     <p style="margin-top: 48px; color: #ffffff33; font-size: 11px;">© 2026 AKIDISLAB. Waves — Dark Mesh Chat.</p>
 </body>
