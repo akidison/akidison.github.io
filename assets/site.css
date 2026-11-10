@@ -98,15 +98,16 @@ a:hover { text-decoration-thickness: 2px; }
 /* Веер иконок — стопка карточек, раскрывается при загрузке */
 .fan { position: relative; height: 340px; }
 .fan img {
-  position: absolute; left: 50%; top: 50%; width: 156px; height: 156px;
-  border-radius: 38px; box-shadow: 0 18px 40px -14px rgba(20, 22, 27, 0.45);
+  position: absolute; left: 50%; top: 50%; width: 140px; height: 140px;
+  border-radius: 32px; box-shadow: 0 18px 40px -14px rgba(20, 22, 27, 0.45);
   transform: translate(-50%, -50%);
   animation: fan 900ms cubic-bezier(.2, .8, .2, 1) 150ms both;
 }
-.fan img:nth-child(1) { --to: translate(-150%, -34%) rotate(-15deg); z-index: 1; }
-.fan img:nth-child(2) { --to: translate(-92%, -60%) rotate(-5deg); z-index: 2; }
-.fan img:nth-child(3) { --to: translate(-30%, -58%) rotate(5deg); z-index: 3; }
-.fan img:nth-child(4) { --to: translate(28%, -32%) rotate(15deg); z-index: 4; }
+.fan img:nth-child(1) { --to: translate(-176%, -30%) rotate(-18deg); z-index: 1; }
+.fan img:nth-child(2) { --to: translate(-122%, -56%) rotate(-9deg); z-index: 2; }
+.fan img:nth-child(3) { --to: translate(-64%, -66%) rotate(0deg); z-index: 3; }
+.fan img:nth-child(4) { --to: translate(-6%, -56%) rotate(9deg); z-index: 4; }
+.fan img:nth-child(5) { --to: translate(50%, -30%) rotate(18deg); z-index: 5; }
 @keyframes fan { from { transform: translate(-50%, -50%) rotate(0); } to { transform: var(--to); } }
 .fan img { transform: var(--to); }
 
@@ -203,7 +204,7 @@ table.keys td:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, mo
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; gap: 12px; padding: 48px 0 40px; }
   .fan { height: 250px; order: -1; }
-  .fan img { width: 124px; height: 124px; border-radius: 28px; }
+  .fan img { width: 100px; height: 100px; border-radius: 23px; }
   .app--featured { grid-template-columns: 88px 1fr; padding: 24px; }
   .mosaic-card { grid-column: 1 / -1; }
 }
@@ -218,4 +219,21 @@ table.keys td:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, mo
 }
 @media (prefers-reduced-motion: reduce) {
   .fan img { animation: none; }
+}
+
+/* Группы приложений: компактные строки в две колонки */
+.group-title { font-size: 15px; font-weight: 650; color: var(--subtle); margin: 44px 0 0; letter-spacing: 0; }
+.group-title + .app--featured { margin-top: 14px; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 44px; }
+.item { display: grid; grid-template-columns: 76px 1fr; gap: 18px; padding: 22px 0; border-top: 1px solid var(--hairline); }
+.item img { width: 76px; height: 76px; border-radius: 18px; box-shadow: 0 8px 18px -10px rgba(20, 22, 27, .5); }
+.item h4 { font-size: 19px; letter-spacing: -0.015em; margin: 0; font-weight: 750; }
+.item h4 small { font-size: 14px; font-weight: 500; color: var(--subtle); margin-left: 6px; letter-spacing: 0; }
+.item p { margin: 5px 0 0; color: var(--subtle); font-size: 15.5px; line-height: 1.5; }
+.item .links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: 14.5px; font-weight: 600; }
+.item .note { color: var(--faint); font-weight: 500; }
+@media (max-width: 720px) {
+  .cards { grid-template-columns: 1fr; }
+  .item { grid-template-columns: 60px 1fr; gap: 14px; }
+  .item img { width: 60px; height: 60px; border-radius: 14px; }
 }
