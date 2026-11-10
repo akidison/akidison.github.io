@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Srpski Word Data · AKIDISLAB</title>
+  <meta name="description" content="Word data used in the Srpski app, derived from Wiktionary and published under CC BY-SA 4.0.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="mark" href="/">akidislab</a>
+      <nav aria-label="Main">
+        <a href="../../index.html#apps">Apps</a>
+        <a href="../../support.html">Support</a>
+        <a href="../../privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="narrow doc">
+    <div class="page-head">
+      <h1>Srpski word data</h1>
+      <p>Stress marks, Cyrillic spelling, word forms, related words and word origins shown in the Srpski app.</p>
+    </div>
+
+    <div class="download">
+      <div>
+        <b>word_info.json</b>
+        <span>3,479 Serbian words, about 700 KB, CC BY-SA 4.0</span>
+      </div>
+      <a class="btn" href="word_info.json" download>Download</a>
+    </div>
+
+    <section>
+      <h2>Source</h2>
+      <p>This data is derived from <a href="https://en.wiktionary.org">English Wiktionary</a> (Serbo-Croatian entries), using the machine-readable extract published by <a href="https://kaikki.org">kaikki.org</a> (October 2026 dump). Wiktionary text is written by Wiktionary contributors and licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0</a> license.</p>
+    </section>
+
+    <section>
+      <h2>Changes we made</h2>
+      <ul>
+        <li>Kept only the words used in Srpski and only Serbian (ekavian) forms.</li>
+        <li>Removed stress and length marks from inflected forms; the headword keeps its stress mark.</li>
+        <li>Turned etymology templates into a short source line: language, word in Latin script and, for loanwords, what the source word means.</li>
+        <li>Added our own short meanings for about 120 source words of loanwords.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>License</h2>
+      <p>You may share and adapt this data, including commercially, as long as you give credit to Wiktionary contributors and to this page, indicate if you made changes, and distribute your adaptations under the same license: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </section>
+
+    <section>
+      <h2>Format</h2>
+      <p>A JSON object keyed by the Serbian word in Latin script. Every field is optional.</p>
+      <table class="keys">
+        <tr><td>ac</td><td>Headword with stress mark, e.g. kȕća</td></tr>
+        <tr><td>cy</td><td>Cyrillic spelling</td></tr>
+        <tr><td>n</td><td>Noun declension: singular and plural, 7 cases each (nom, gen, dat, acc, voc, instr, loc)</td></tr>
+        <tr><td>fu</td><td>Future tense without a pronoun, 6 persons</td></tr>
+        <tr><td>im</td><td>Imperative: ti, mi, vi</td></tr>
+        <tr><td>ao</td><td>Aorist, 6 persons</td></tr>
+        <tr><td>vn</td><td>Verbal noun</td></tr>
+        <tr><td>dim, aug, radj</td><td>Diminutive, augmentative, relational adjective</td></tr>
+        <tr><td>der, rel</td><td>Derived and related words</td></tr>
+        <tr><td>syn, ant</td><td>Synonyms and antonyms</td></tr>
+        <tr><td>ij</td><td>Ijekavian variant</td></tr>
+        <tr><td>et</td><td>Origin: <code>src</code> [language, word], <code>g</code> meaning of the source word (ru, en), <code>k</code> “c” for a calque, <code>ru</code> and <code>en</code> related words</td></tr>
+      </table>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div>© 2026 AKIDISLAB. Data: Wiktionary contributors, CC BY-SA 4.0</div>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="../../support.html">Support</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,454 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support - AKIDISLAB</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        /* Animated gradient overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(120, 0, 255, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(0, 200, 255, 0.1) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: 0;
-            animation: gradientPulse 8s ease-in-out infinite;
-        }
-
-        @keyframes gradientPulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-
-        /* Stars background */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            background: rgba(15, 12, 41, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 15px 40px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-        }
-
-        nav a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Main container */
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 140px 24px 60px;
-        }
-
-        /* Hero section */
-        .hero {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 0%, #667eea 50%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.6);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Support cards */
-        .support-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-            animation: fadeInUp 1s ease;
-            animation-fill-mode: both;
-        }
-
-        .support-card:nth-child(1) { animation-delay: 0.1s; }
-        .support-card:nth-child(2) { animation-delay: 0.2s; }
-        .support-card:nth-child(3) { animation-delay: 0.3s; }
-
-        .support-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(102, 126, 234, 0.5);
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                0 0 60px rgba(102, 126, 234, 0.1);
-        }
-
-        .support-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #fff 0%, #a8a8ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .support-card p {
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .support-card a {
-            color: #a8a8ff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .support-card a:hover {
-            color: #fff;
-        }
-
-        /* Email button */
-        .email-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .email-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-            color: white;
-        }
-
-        /* FAQ items */
-        .faq-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 24px 0;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .faq-item:first-child {
-            padding-top: 0;
-        }
-
-        .faq-item h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .faq-item h3::before {
-            content: '?';
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-
-        .faq-item p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin: 0;
-            padding-left: 38px;
-        }
-
-        /* Response time card special */
-        .response-card {
-            text-align: center;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-        }
-
-        .response-card .icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        /* Footer */
-        footer {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 40px;
-        }
-
-        footer p {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: #667eea;
-        }
-
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-            }
-
-            nav a {
-                margin-left: 15px;
-                font-size: 0.9rem;
-            }
-
-            .container {
-                padding: 120px 20px 40px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .support-card {
-                padding: 28px;
-            }
-
-            .faq-item h3 {
-                font-size: 1rem;
-            }
-
-            .faq-item p {
-                padding-left: 0;
-                margin-top: 10px;
-            }
-
-            .faq-item h3::before {
-                display: none;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support · AKIDISLAB</title>
+  <meta name="description" content="Support for AKIDISLAB apps: contact, purchases, subscriptions and answers to common questions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-    <div class="stars" id="stars"></div>
+  <header class="top">
+    <div class="wrap">
+      <a class="mark" href="/">akidislab</a>
+      <nav aria-label="Main">
+        <a href="index.html#apps">Apps</a>
+        <a href="support.html" aria-current="page">Support</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
 
-    <header id="header">
-        <a href="index.html" class="logo">AKIDISLAB</a>
-        <nav>
-            <a href="index.html#apps">Apps</a>
-            <a href="index.html#contact">Contact</a>
-        </nav>
-    </header>
-
-    <div class="container">
-        <div class="hero">
-            <h1>Support</h1>
-            <p class="subtitle">We're here to help you with any questions or issues</p>
-        </div>
-
-        <div class="support-card">
-            <h2>Contact Us</h2>
-            <p>Have a question, found a bug, or want to suggest a feature? We'd love to hear from you!</p>
-            <a href="mailto:akidislab@gmail.com" class="email-btn">
-                <span>✉️</span> akidislab@gmail.com
-            </a>
-        </div>
-
-        <div class="support-card">
-            <h2>Frequently Asked Questions</h2>
-
-            <div class="faq-item">
-                <h3>How do I restore my purchases?</h3>
-                <p>Go to Settings in the app and tap "Restore Purchases". Make sure you're signed in with the same Apple ID you used for the original purchase.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>How do I cancel my subscription?</h3>
-                <p>Subscriptions are managed through your Apple ID. Go to Settings → [Your Name] → Subscriptions on your device to manage or cancel.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>The app is crashing or not working properly</h3>
-                <p>Try closing and reopening the app. If the issue persists, try reinstalling the app or contact us with details about your device and iOS version.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3>How do I request a refund?</h3>
-                <p>Refunds are processed by Apple. Visit <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a> to request a refund for any purchase.</p>
-            </div>
-        </div>
-
-        <div class="support-card response-card">
-            <div class="icon">⚡</div>
-            <h2>Response Time</h2>
-            <p>We typically respond to support requests within 24-48 hours. Thank you for your patience!</p>
-        </div>
+  <main class="narrow">
+    <div class="page-head">
+      <h1>Support</h1>
+      <p>Have a question, found a bug, or want to suggest a feature? We'd love to hear from you.</p>
     </div>
 
-    <footer>
-        <p>© 2025 AKIDISLAB · <a href="index.html">Home</a> · <a href="privacy.html">Privacy</a></p>
-    </footer>
+    <div class="contact">
+      <a class="mail" href="mailto:akidislab@gmail.com">akidislab@gmail.com</a>
+      <p>We typically respond to support requests within 24–48 hours. Thank you for your patience!</p>
+    </div>
 
-    <script>
-        // Generate stars
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            star.style.width = Math.random() * 2 + 1 + 'px';
-            star.style.height = star.style.width;
-            starsContainer.appendChild(star);
-        }
+    <div class="faq">
+      <h2>Purchases and subscriptions</h2>
+      <details>
+        <summary>How do I restore my purchases?</summary>
+        <div>Go to Settings in the app and tap “Restore Purchases”. Make sure you're signed in with the same Apple ID you used for the original purchase.</div>
+      </details>
+      <details>
+        <summary>How do I cancel my subscription?</summary>
+        <div>Subscriptions are managed through your Apple ID. Go to Settings → [Your Name] → Subscriptions on your device to manage or cancel.</div>
+      </details>
+      <details>
+        <summary>How do I request a refund?</summary>
+        <div>Refunds are processed by Apple. Visit <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a> to request a refund for any purchase.</div>
+      </details>
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    </script>
+      <h2>Problems</h2>
+      <details>
+        <summary>The app is crashing or not working properly</summary>
+        <div>Try closing and reopening the app. If the issue persists, try reinstalling the app or contact us with details about your device and iOS version.</div>
+      </details>
+
+      <h2 id="srpski">Srpski</h2>
+      <details>
+        <summary>How do I keep my progress on several devices?</summary>
+        <div>Srpski syncs your progress, your own word sets and your associations through iCloud. Sign in with the same Apple ID on each device and keep iCloud turned on.</div>
+      </details>
+      <details>
+        <summary>How do I start over?</summary>
+        <div>Open Settings in the app and tap “Reset all progress”. Statistics, streak and reviews start over; your own word sets stay.</div>
+      </details>
+      <details>
+        <summary>Where do stress marks, word forms and word origins come from?</summary>
+        <div>From Wiktionary, under the CC BY-SA 4.0 license. The data we use is published on the <a href="srpski/data/">Srpski word data</a> page.</div>
+      </details>
+
+      <h2>Waves</h2>
+      <p style="color: var(--subtle); margin: 0 0 8px;">Questions about the mesh messenger are answered on the <a href="waves/support/">Waves support page</a>.</p>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div>© 2026 AKIDISLAB</div>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>

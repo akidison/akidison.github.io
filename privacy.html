@@ -1,447 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - AKIDISLAB</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(120, 0, 255, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(0, 200, 255, 0.1) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: 0;
-            animation: gradientPulse 8s ease-in-out infinite;
-        }
-
-        @keyframes gradientPulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            background: rgba(15, 12, 41, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 15px 40px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-        }
-
-        nav a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 140px 24px 60px;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 0%, #667eea 50%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.6);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .hero .updated {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.4);
-            margin-top: 15px;
-        }
-
-        .privacy-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-            animation: fadeInUp 1s ease;
-            animation-fill-mode: both;
-        }
-
-        .privacy-card:nth-child(1) { animation-delay: 0.1s; }
-        .privacy-card:nth-child(2) { animation-delay: 0.15s; }
-        .privacy-card:nth-child(3) { animation-delay: 0.2s; }
-        .privacy-card:nth-child(4) { animation-delay: 0.25s; }
-        .privacy-card:nth-child(5) { animation-delay: 0.3s; }
-        .privacy-card:nth-child(6) { animation-delay: 0.35s; }
-
-        .privacy-card:hover {
-            border-color: rgba(102, 126, 234, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .privacy-card h2 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 0%, #a8a8ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .privacy-card h2 .icon {
-            font-size: 1.5rem;
-        }
-
-        .privacy-card p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-
-        .privacy-card p:last-child {
-            margin-bottom: 0;
-        }
-
-        .privacy-card ul {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.8;
-            padding-left: 20px;
-            margin-bottom: 16px;
-        }
-
-        .privacy-card li {
-            margin-bottom: 8px;
-        }
-
-        .privacy-card a {
-            color: #a8a8ff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .privacy-card a:hover {
-            color: #fff;
-        }
-
-        .highlight-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
-            text-align: center;
-        }
-
-        .highlight-card .big-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .apps-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .app-badge {
-            background: rgba(102, 126, 234, 0.2);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        footer {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 40px;
-        }
-
-        footer p {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: #667eea;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-            }
-
-            nav a {
-                margin-left: 15px;
-                font-size: 0.9rem;
-            }
-
-            .container {
-                padding: 120px 20px 40px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .privacy-card {
-                padding: 28px;
-            }
-
-            .privacy-card h2 {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy · AKIDISLAB</title>
+  <meta name="description" content="Privacy policy for apps developed and published by AKIDISLAB.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-    <div class="stars" id="stars"></div>
+  <header class="top">
+    <div class="wrap">
+      <a class="mark" href="/">akidislab</a>
+      <nav aria-label="Main">
+        <a href="index.html#apps">Apps</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html" aria-current="page">Privacy</a>
+      </nav>
+    </div>
+  </header>
 
-    <header id="header">
-        <a href="index.html" class="logo">AKIDISLAB</a>
-        <nav>
-            <a href="index.html#apps">Apps</a>
-            <a href="support.html">Support</a>
-        </nav>
-    </header>
-
-    <div class="container">
-        <div class="hero">
-            <h1>Privacy Policy</h1>
-            <p class="subtitle">Your privacy is important to us</p>
-            <p class="updated">Last updated: December 2024</p>
-        </div>
-
-        <div class="privacy-card highlight-card">
-            <div class="big-icon">🔒</div>
-            <h2>We Value Your Privacy</h2>
-            <p>This policy applies to all apps developed and published by AKIDISLAB. We believe in transparency and keeping things simple.</p>
-            <div class="apps-list">
-                <span class="app-badge">Tower Stack</span>
-                <span class="app-badge">Print Page</span>
-                <span class="app-badge">All Future Apps</span>
-            </div>
-        </div>
-
-        <div class="privacy-card">
-            <h2><span class="icon">📊</span> Data Collection</h2>
-            <p>Our apps are designed with privacy in mind. We do not collect, store, or share any personal information.</p>
-            <p><strong>What we DON'T collect:</strong></p>
-            <ul>
-                <li>Personal identification information</li>
-                <li>Location data</li>
-                <li>Contact information</li>
-                <li>Usage tracking or analytics</li>
-                <li>Device identifiers for advertising</li>
-            </ul>
-        </div>
-
-        <div class="privacy-card">
-            <h2><span class="icon">💾</span> Local Storage</h2>
-            <p>Some of our apps may store data locally on your device to save your progress, preferences, or created content. This data:</p>
-            <ul>
-                <li>Stays on your device only</li>
-                <li>Is never transmitted to our servers</li>
-                <li>Can be deleted by uninstalling the app</li>
-            </ul>
-        </div>
-
-        <div class="privacy-card">
-            <h2><span class="icon">💳</span> Purchases</h2>
-            <p>In-app purchases and subscriptions are processed entirely by Apple through the App Store. We do not have access to your payment information, Apple ID, or purchase history beyond what Apple provides for transaction verification.</p>
-        </div>
-
-        <div class="privacy-card">
-            <h2><span class="icon">📢</span> Advertising</h2>
-            <p>Some of our apps may display advertisements provided by third-party ad networks (such as Google AdMob). These services may collect anonymous data according to their own privacy policies. You can opt out of personalized advertising in your device settings.</p>
-        </div>
-
-        <div class="privacy-card">
-            <h2><span class="icon">👶</span> Children's Privacy</h2>
-            <p>Our apps do not knowingly collect any personal information from children. All data processing (if any) occurs locally on the device.</p>
-        </div>
-
-        <div class="privacy-card">
-            <h2><span class="icon">📡</span> Waves — Dark Mesh Chat</h2>
-            <p>Waves is a peer-to-peer mesh messenger that works without internet using Bluetooth and Wi-Fi Direct. In addition to the general policies above, the following applies specifically to Waves:</p>
-            <ul>
-                <li><strong>Mesh Communication:</strong> All messages are transmitted directly between devices via Apple's MultipeerConnectivity. No data passes through our servers.</li>
-                <li><strong>End-to-End Encryption:</strong> Private messages are encrypted using Curve25519 key exchange and ChaChaPoly. Only sender and recipient can read them. Relay nodes see only encrypted data.</li>
-                <li><strong>Location Groups:</strong> When you create a location-based group, we store only the group name, GPS coordinates, radius, and password hash (if set) in Firebase Firestore. No user names, messages, or device identifiers are stored.</li>
-                <li><strong>Disappearing Messages:</strong> Messages auto-delete based on your TTL setting (15 minutes to 2 hours).</li>
-                <li><strong>No Accounts:</strong> Waves requires no registration, no email, no phone number.</li>
-                <li><strong>Permissions:</strong> Bluetooth and Local Network are required for mesh. Microphone (voice messages), Location (location groups), Photos (photo messages), and Nearby Interaction (AR Radar) are optional and requested only when used.</li>
-            </ul>
-            <p>For the full Waves privacy policy, visit <a href="/waves/privacy/">Waves Privacy Policy</a>.</p>
-        </div>
-
-        <div class="privacy-card">
-            <h2><span class="icon">📝</span> Changes to This Policy</h2>
-            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
-        </div>
-
-        <div class="privacy-card">
-            <h2><span class="icon">📧</span> Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-            <p><a href="mailto:akidislab@gmail.com">akidislab@gmail.com</a></p>
-        </div>
+  <main class="narrow doc">
+    <div class="page-head">
+      <h1>Privacy Policy</h1>
+      <p>Your privacy is important to us</p>
+      <p class="meta">Last updated: December 2024</p>
     </div>
 
-    <footer>
-        <p>© 2026 AKIDISLAB · <a href="index.html">Home</a> · <a href="support.html">Support</a></p>
-    </footer>
+    <section>
+      <h2>We Value Your Privacy</h2>
+      <p>This policy applies to all apps developed and published by AKIDISLAB. We believe in transparency and keeping things simple.</p>
+      <div class="chips"><span>Tower Stack</span><span>Print Page</span><span>All Future Apps</span></div>
+    </section>
 
-    <script>
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            star.style.width = Math.random() * 2 + 1 + 'px';
-            star.style.height = star.style.width;
-            starsContainer.appendChild(star);
-        }
+    <section>
+      <h2>Data Collection</h2>
+      <p>Our apps are designed with privacy in mind. We do not collect, store, or share any personal information.</p>
+      <p><strong>What we DON'T collect:</strong></p>
+      <ul>
+        <li>Personal identification information</li>
+        <li>Location data</li>
+        <li>Contact information</li>
+        <li>Usage tracking or analytics</li>
+        <li>Device identifiers for advertising</li>
+      </ul>
+    </section>
 
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    </script>
+    <section>
+      <h2>Local Storage</h2>
+      <p>Some of our apps may store data locally on your device to save your progress, preferences, or created content. This data:</p>
+      <ul>
+        <li>Stays on your device only</li>
+        <li>Is never transmitted to our servers</li>
+        <li>Can be deleted by uninstalling the app</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Purchases</h2>
+      <p>In-app purchases and subscriptions are processed entirely by Apple through the App Store. We do not have access to your payment information, Apple ID, or purchase history beyond what Apple provides for transaction verification.</p>
+    </section>
+
+    <section>
+      <h2>Advertising</h2>
+      <p>Some of our apps may display advertisements provided by third-party ad networks (such as Google AdMob). These services may collect anonymous data according to their own privacy policies. You can opt out of personalized advertising in your device settings.</p>
+    </section>
+
+    <section>
+      <h2>Children's Privacy</h2>
+      <p>Our apps do not knowingly collect any personal information from children. All data processing (if any) occurs locally on the device.</p>
+    </section>
+
+    <section>
+      <h2>Waves — Dark Mesh Chat</h2>
+      <p>Waves is a peer-to-peer mesh messenger that works without internet using Bluetooth and Wi-Fi Direct. In addition to the general policies above, the following applies specifically to Waves:</p>
+      <ul>
+        <li><strong>Mesh Communication:</strong> All messages are transmitted directly between devices via Apple's MultipeerConnectivity. No data passes through our servers.</li>
+        <li><strong>End-to-End Encryption:</strong> Private messages are encrypted using Curve25519 key exchange and ChaChaPoly. Only sender and recipient can read them. Relay nodes see only encrypted data.</li>
+        <li><strong>Location Groups:</strong> When you create a location-based group, we store only the group name, GPS coordinates, radius, and password hash (if set) in Firebase Firestore. No user names, messages, or device identifiers are stored.</li>
+        <li><strong>Disappearing Messages:</strong> Messages auto-delete based on your TTL setting (15 minutes to 2 hours).</li>
+        <li><strong>No Accounts:</strong> Waves requires no registration, no email, no phone number.</li>
+        <li><strong>Permissions:</strong> Bluetooth and Local Network are required for mesh. Microphone (voice messages), Location (location groups), Photos (photo messages), and Nearby Interaction (AR Radar) are optional and requested only when used.</li>
+      </ul>
+      <p>For the full Waves privacy policy, visit <a href="/waves/privacy/">Waves Privacy Policy</a>.</p>
+    </section>
+
+    <section>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+    </section>
+
+    <section>
+      <h2>Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+      <p><a href="mailto:akidislab@gmail.com">akidislab@gmail.com</a></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div>© 2026 AKIDISLAB</div>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="support.html">Support</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>
